@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import MinMax from './MinMax'
+import GeneralCart from './GeneralCart'
 
 function booksStub() {
   return [
@@ -74,15 +75,23 @@ export default function BookCart() {
                   onChange={(quantity) => setQuantity(book.id, quantity)}
                 />
               </td>
+              <td>{book.quantity * book.price}</td>
             </tr>
           ))}
+
         </tbody>
       </table>
       <div className="total">
-        <h3>Total amount:</h3>
-        <h3>Total quantity:</h3>
+     
+        <GeneralCart
+        total={books.reduce((acc,book) =>acc + book.price*book.quantity,0)}
+        quantity={books.reduce((acc2,book) =>acc2 + book.quantity,0)}
+        />
+      
       </div>
-      <Link to="/about">About Shop</Link>
+      <p><Link to="/about">About Shop</Link></p>
+      <p><Link to="/GeneralCart">GeneralCart</Link></p>
+
     </div>
   )
 }
